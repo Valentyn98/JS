@@ -112,6 +112,26 @@ for (let user of users) {
     if (user.age>30){
         document.write(`<div>
     ${user.name} ${user.age} ${user.status}
+    
 </div>`)
     }
 }
+
+for (let user of users) {
+    if (user.status === true){
+        document.write(`<div>
+    ${user.name} ${user.age} ${user.status}
+    
+</div>`)
+    }
+}
+
+for (let user of users) {
+    if (user.status === false){
+        document.write(`<div>
+    ${user.name} ${user.age} ${user.status}
+    
+</div>`)
+    }
+}
+
