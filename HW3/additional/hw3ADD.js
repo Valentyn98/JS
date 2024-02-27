@@ -171,28 +171,33 @@ let usersAA = [
 // -знайти наібльшу книжку.
 
 let maxPage = 0
+let n = ' '
 for (let g = 0; g < usersAA.length; g++) {
-    let pageValue = usersAA[g].page
-    if (pageValue > maxPage){
-        maxPage = pageValue
+    let pageValue = usersAA[g]
+    if (pageValue.page > maxPage){
+        maxPage = pageValue.page
+        n = pageValue.name
 }
 }
-console.log(maxPage)
+console.log(maxPage + " " + n)
+
 
 
 // - знайти книжку/ки з найбільшою кількістю жанрів
 
 
 // - знайти книжку/ки з найдовшою назвою
+
 let maxLength = 0
+let m = ' '
 for (let g = 0; g < usersAA.length; g++) {
-    let leng = usersAA[g].name.length
-    console.log(leng + " " + usersAA[g].name)
-    if (leng > maxLength){
-        maxLength = leng
+    let leng = usersAA[g]
+    if (leng.name.length > maxLength){
+        maxLength = leng.name.length
+        m = leng.name
     }
 }
-console.log(maxLength)
+console.log(maxLength + " " + m)
 
 // - знайти книжку/ки які писали 2 автори
 
