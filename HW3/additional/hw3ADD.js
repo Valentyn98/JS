@@ -164,10 +164,12 @@ for (let dd = 0; dd <= 100; dd+=3) {
 // стоврити масив книжок (назва, кількість сторінок, автори , жанри).
 let usersAA = [
     {name: 'vasyakolya', page: 100, aughtors: 'Omar, Haval', genre:'horor, fantazy'},
-    {name: 'petyaf', page: 30, aughtors: 'Shstka, Kolbaca', genre: 'fantazy, old'},
-    {name: 'kolyawwwkklkll', page: 29, aughtors: 'Vinuk, Sovok', genre:'old'},
+    {name: 'petyaf', page: 30, aughtors: 'Shstka, Kolbaca, fghjk, fghjk', genre: 'fantazy, old'},
+    {name: 'kolyawwwkklkll', page: 29, aughtors: 'Vinuk, Sovok, jj, jj, ki', genre:'old'},
     {name: 'olya', page: 218, aughtors: 'Kastrula, Varikoz', genre:'history'},
 ];
+
+
 // -знайти наібльшу книжку.
 
 let maxPage = 0
@@ -184,8 +186,16 @@ console.log(maxPage + " " + n)
 
 
 // - знайти книжку/ки з найбільшою кількістю жанрів
+let genres = []
+let finishGenre = []
+for (let c = 0; c < usersAA.length; c++) {
+    genres[genres.length] = usersAA[c].genre
+    if (){
 
-
+    }
+    console.log(genres)
+    // console.log(finishGenre)
+}
 // - знайти книжку/ки з найдовшою назвою
 
 let maxLength = 0
