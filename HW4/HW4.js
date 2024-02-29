@@ -126,7 +126,31 @@
 // swap(arrTwo)
 // Приклад  swap([11,22,33,44],0,1) //=> [22,11,33,44]
 
+
 // - Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
+// Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
+
+function exchange(sumUAH,currencyValues,exchangeCurrency){
+    let usdt = 'no'
+    let buyUsdt = 'no';
+    let eur = 'yes'
+    let buyEur = 'yes'
+    let final
+
+    for (let i = 0; i < currencyValues.length; i++) {
+        if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'yes' && usdt === 'yes' ){
+            return final = sumUAH / currencyValues[i].value
+        }else if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'no' && usdt === 'yes' ) {
+            return final = sumUAH * currencyValues[i].value
+        }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'yes' && eur === 'yes' ) {
+            return final = sumUAH * currencyValues[i].value
+        }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'no' && eur === 'yes' ) {
+            return final = sumUAH * currencyValues[i].value
+        }
+    }
+}
+console.log(exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'EUR'))
+
 
 // let arrValue = [{currency:'USD',value:40},
 //     {{currency:'EUR',value:40}}]
@@ -140,36 +164,33 @@
 //     console.log(arrUsdt,arrEur)
 // }
 // changeC(1000,38,41)
-let arr = []
-let operation = {}
-operation.currency = prompt("usd or eur")
-operation.type = prompt("sell or buy")
-console.log(operation.type)
-operation.sum = +prompt("Кількість Гривні")
-
-
-
-let euroH = 41
-let usdH = 39
-
-function changer(operation,euroH,usdH,arr){
-
-    if (operation.currency = 'usd'){
-        operation.currency = 39
-    }else if (operation.currency = 'eur'){
-        operation.currency = 41
-    }
-
-    if (operation.type = 'buy'){
-        operation.result = operation.sum / operation.currency
-    }else if (operation.type = 'sell'){
-        operation.result = operation.sum * operation.currency
-    }
-    arr[arr.length] = operation
-
-    for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i])
-    }
-}
-changer(operation,euroH,usdH,arr)
-// Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
+// let arr = []
+// let operation = {}
+// operation.currency = prompt("usd or eur")
+// operation.type = prompt("sell or buy")
+// console.log(operation.type)
+// operation.sum = +prompt("Кількість Гривні")
+//
+// let euroH = 41
+// let usdH = 39
+//
+// function changer(operation,euroH,usdH,arr){
+//
+//     if (operation.currency = 'usd'){
+//         operation.currency = 39
+//     }else if (operation.currency = 'eur'){
+//         operation.currency = 41
+//     }
+//
+//     if (operation.type = 'buy'){
+//         operation.result = operation.sum / operation.currency
+//     }else if (operation.type = 'sell'){
+//         operation.result = operation.sum * operation.currency
+//     }
+//     arr[arr.length] = operation
+//
+//     for (let i = 0; i < arr.length; i++) {
+//         console.log(arr[i])
+//     }
+// }
+// changer(operation,euroH,usdH,arr)
