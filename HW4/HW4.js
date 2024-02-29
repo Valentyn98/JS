@@ -130,26 +130,46 @@
 // - Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
 // Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
 
-function exchange(sumUAH,currencyValues,exchangeCurrency){
-    let usdt = 'no'
-    let buyUsdt = 'no';
-    let eur = 'yes'
-    let buyEur = 'yes'
-    let final
 
+
+//ВАРІАНТ 1
+// function exchange(sumUAH,currencyValues,exchangeCurrency){
+//     let usdt = 'no'
+//     let buyUsdt = 'no';
+//     let eur = 'yes'
+//     let buyEur = 'yes'
+//     let final
+//
+//     for (let i = 0; i < currencyValues.length; i++) {
+//         if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'yes' && usdt === 'yes' ){
+//             return final = sumUAH / currencyValues[i].value
+//         }else if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'no' && usdt === 'yes' ) {
+//             return final = sumUAH * currencyValues[i].value
+//         }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'yes' && eur === 'yes' ) {
+//             return final = sumUAH * currencyValues[i].value
+//         }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'no' && eur === 'yes' ) {
+//             return final = sumUAH * currencyValues[i].value
+//         }
+//     }
+// }
+// console.log(exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'EUR'))
+
+
+//ВАРІАНТ 2
+function exchange(sumUAH,currencyValues,exchangeCurrency){
+    let buyOrSell = 'sell';
     for (let i = 0; i < currencyValues.length; i++) {
-        if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'yes' && usdt === 'yes' ){
-            return final = sumUAH / currencyValues[i].value
-        }else if (currencyValues[i].currency === exchangeCurrency &&  buyUsdt === 'no' && usdt === 'yes' ) {
-            return final = sumUAH * currencyValues[i].value
-        }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'yes' && eur === 'yes' ) {
-            return final = sumUAH * currencyValues[i].value
-        }else if (currencyValues[i].currency === exchangeCurrency &&  buyEur === 'no' && eur === 'yes' ) {
-            return final = sumUAH * currencyValues[i].value
+        if (exchangeCurrency === currencyValues[i].currency){
+            if (buyOrSell === 'buy'){
+                console.log(sumUAH / currencyValues[i].value);
+            }else if (buyOrSell === 'sell'){
+                console.log(sumUAH * currencyValues[i].value);
+            }
         }
     }
 }
-console.log(exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'EUR'))
+exchange(10000, [{currency: 'USD', value: 40}, {currency: 'EUR', value: 42}], 'EUR')
+
 
 
 // let arrValue = [{currency:'USD',value:40},
