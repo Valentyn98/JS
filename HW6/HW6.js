@@ -154,10 +154,11 @@ console.log(diamond);
 
 
 let clubs = desk.filter((value) => {
-    console.log(value);
+    return value.cardSuit === "clubs"
 })
-
-
+console.log(clubs)
+let res = clubs.splice(4,5)
+console.log(res);
 
 // {
 //     cardSuit: '', // 'spade', 'diamond','heart', 'clubs'
@@ -168,12 +169,28 @@ let clubs = desk.filter((value) => {
 // =========================
 //
 //     Взяти описану колоду карт, та за допомоги reduce упакувати всі карти по "мастях" в об'єкт
+let b = desk.reduce((accumulator, user) => {
+    if (user.cardSuit === 'spade'){
+        accumulator[0].push(user)
+    }if (user.cardSuit === 'clubs'){
+        accumulator[1].push(user)
+        }if (user.cardSuit === 'heart'){
+            accumulator[2].push(user)
+        }if (user.cardSuit === 'diamond'){
+            accumulator[3].push(user)
+        }
+    return accumulator
+    },
+    [[],[],[],[]])
+console.log(b);
 // {
 //     spades:[],
 //         diamonds:[],
 //     hearts:[],
 //     clubs:[]
 // }
+
+
 // =========================
 //     взяти з arrays.js (який лежить в папці 2023 plan) масив coursesArray
 
