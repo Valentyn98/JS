@@ -57,7 +57,7 @@
 // який при кожному перезавантажені сторінки буде додавати до неї +1
 
 // let div = document.getElementById('counter')
-// let value = localStorage.getItem('value') || 0;
+// let value = localStorage.gtimeetItem('value') || 0;
 // let newValue = parseInt(value) + 1;
 //
 // div.innerText = newValue;
@@ -340,26 +340,41 @@ let users = [
 //     зміна ціни відбувається тільки на перезавантаження, які відбулись пізніше ніж 10 секунд після попереднього.
 //     При перезавантаженні, яке відбулось раніше ніж минуло 10 секунд - нічого не відбувається
 
+// let blockCounter = document.createElement('div')
+// document.body.append(blockCounter)
+// let co = parseInt(localStorage.getItem('counter')) || 100
+//
+// document.onreadystatechange = function () {
+//         if (document.readyState === 'interactive') {
+//             let time = new Date().getTime()
+//             let lastReload = parseInt(localStorage.getItem('TimeOfReload')) || 0
+//
+//             if (time-lastReload > 10000){
+//                 co = co+10;
+//                 localStorage.setItem('TimeOfReload', time.toString())
+//             }
+//
+//             blockCounter.innerText = co
+//             localStorage.setItem('counter',parseInt(co))
+//             }
+// }
+
+
 let blockCounter = document.createElement('div')
 document.body.append(blockCounter)
-let co = parseInt(localStorage.getItem('counter')) || 100
 
+let co = +localStorage.getItem('counter') || 100
 
+document.onreadystatechange = function (){
+    if (document.readyState === 'interactive'){
+        let time = new Date().getTime()
+        let lastReload = +localStorage.getItem('lastReload') || 0
 
-let b = document.onreadystatechange = function () {
-        if (document.readyState === 'interactive') {
-            let time = new Date().getTime()
-
-            let lastReload = parseInt(localStorage.getItem('TimeOfReload')) || time
-            if (time-lastReload > 100){
-                co = co+10;
-                localStorage.setItem('TimeOfReload',time.toString())
-            }
-
-            blockCounter.innerText = co
-            localStorage.setItem('counter',parseInt(co))
+        if (time - lastReload > 10000){
+            co = co+10
+            localStorage.setItem('lastReload', time.toString())
         }
-
+        blockCounter.innerText = co
+        localStorage.setItem('counter', +co)
+    }
 }
-
-
