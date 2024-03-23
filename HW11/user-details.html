@@ -44,15 +44,29 @@
         for (let userElementKey in user) {
             let block = document.createElement('div')
             document.body.append(block)
-            block.innerText = `${userElementKey}: ${user[userElementKey]}`
+
             // console.log(userElementKey)
                 if (userElementKey === 'address' || userElementKey ==='company'){
                     for (let firstKey in user[userElementKey]) {
+
                         let firstChildBlock = document.createElement('div')
                         block.append(firstChildBlock)
                         firstChildBlock.innerText = `${firstKey}: ${user[userElementKey][firstKey]}`
+                        console.log(user[userElementKey].geo)
+//=ПРОБЛЕМА
+                        // if (user[userElementKey].geo){
+                        //     for (let geoKey in user[userElementKey].geo) {
+                        //         let secondChildBlock = document.createElement('div')
+                        //         firstChildBlock.append(secondChildBlock)
+                        //         secondChildBlock.innerText =  `${user[userElementKey].geo[geoKey]}`
+                        //     }
+                        // }
+
                     }
+                }else{
+                    block.innerText = `${userElementKey}: ${user[userElementKey]}`
                 }
+
             }})
 
 

@@ -1,40 +1,43 @@
 // - взяти https://dummyjson.com/docs/carts та вивести інформацію про всі корзини. Відобразити всі поля кожної корзини.
+
 // fetch('https://dummyjson.com/carts')
 //     .then(res => res.json())
-//     .then(res => {
-//         let {carts} = res;
-//         let {products} = res;
-//         for (let cart of carts) {
-//             for (let cartKey in cart) {
-//                 console.log(cart[cartKey])
+//     .then(carts => {
+//         for (const cart of carts.carts) {
+//             let divCarts = document.createElement('div');
+//             divCarts.innerText = `${cart.id}`
+//             document.body.appendChild(divCarts);
 //
-//                 for (let product of products) {
-//                     for (let productKey in product) {
+//             for (let cartElement of cart.products) {
+//                 let infoProd = document.createElement('h2')
+//                 infoProd.innerText = ` Назва корзини: ${cartElement.title} - Ціна: ${cartElement.price}`
 //
-//                     }
-//                 }
+//                 let quantity = document.createElement("p")
+//                 quantity.innerText = `Кількість:  ${cartElement.quantity}`
+//
+//                 let total = document.createElement("p")
+//                 total.innerText = `Загальний:  ${cartElement.total}`
+//
+//                 let discountPercentage = document.createElement("p")
+//                 discountPercentage.innerText = `Відсоток знижки:  ${cartElement.discountPercentage}`
+//
+//                 let discountedPrice = document.createElement("p")
+//                 discountedPrice.innerText = `Ціна зі знижкою:  ${cartElement.discountedPrice}`
+//
+//                 let img = document.createElement('img')
+//                 img.src = `${cartElement.thumbnail}`
+//
+//                 divCarts.append(infoProd,quantity,total,discountPercentage,discountedPrice,img)
 //             }
 //         }
 //     });
 
-fetch('https://dummyjson.com/carts')
-    // .then(res => res.json())
-    // .then(carts => {
-    //     for (const cart of carts.carts) {
-    //         let divCarts = document.createElement('div');
-    //         document.body.appendChild(divCarts);
-    //
-    //         for (let cartElement of cart.products) {
-    //             let infoProd = document.createElement('h2')
-    //             infoProd.innerText = `${cartElement.title} - ${cartElement.price}`
-    //                 document.body.appendChild(infoProd)
-    //         }
-    //     }
-    // });
 // - взяти https://dummyjson.com/docs/recipes та вивести інформацію про всі рецепти.
 // Інгредієнти повинні бути в списку під час відображення.
 
 // document.body.appendChild(rec)
+
+
 // fetch('https://dummyjson.com/recipes')
 //     .then(res => res.json())
 //     .then(recipes => {
@@ -43,37 +46,37 @@ fetch('https://dummyjson.com/carts')
 //
 //                 let div = document.createElement('div')
 //                 document.body.append(div)
-//                 // div.innerText = recipe[recipeKey]
 //
 //                 if (recipeKey === 'ingredients'){
+//                     let ulL = document.createElement('ul')
+//                     div.appendChild(ulL)
+//                     ulL.innerText = 'Інгрідієнти:'
 //                     recipe[recipeKey].forEach(word =>{
-//                         let ulL = document.createElement('ul')
-//                         div.appendChild(ulL)
+//
 //                         let LLi = document.createElement('li')
 //                         ulL.append(LLi)
 //                         LLi.innerText = word
 //                     })
 //                 }else{
-//                     div.innerText = recipe[recipeKey]
+//                     div.innerText =   `${recipeKey} :  ${recipe[recipeKey]}`
 //                 }
 //             }
-//
 //         }
 //         }
 //     );
 //     - зробити файл users.html
 // з ендпоінту http://jsonplaceholder.typicode.com/users отримати всіх користувачів
-fetch('http://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then(user => {
-        for (let userElement of user) {
-            let hOne = document.createElement('h1')
-            document.body.append(hOne)
-            for (let userElementKey in userElement) {
-                hOne.innerText = "Name : " + userElement.name
-            }
-        }
-    });
+// fetch('http://jsonplaceholder.typicode.com/users')
+//     .then(res => res.json())
+//     .then(user => {
+//         for (let userElement of user) {
+//             let hOne = document.createElement('h1')
+//             document.body.append(hOne)
+//             for (let userElementKey in userElement) {
+//                 hOne.innerText = "Name : " + userElement.name
+//             }
+//         }
+//     });
 
 //     вивести їх id + name списком та додати посилання з href = user-details.html?id=XXX (замість ХХХ - айді юзера)
 fetch('http://jsonplaceholder.typicode.com/users')
@@ -83,7 +86,7 @@ fetch('http://jsonplaceholder.typicode.com/users')
             let hOne = document.createElement('h1')
             console.log(userElement.name)
             document.body.append(hOne)
-                hOne.innerText = `${userElement.id} ${userElement.name}`
+                hOne.innerText = `ID: ${userElement.id} NAME: ${userElement.name}`
                 hOne.addEventListener('click', ()=>{
                     location.href = 'user-details.html?id=' + userElement.id
                     console.log(userElement.id)
