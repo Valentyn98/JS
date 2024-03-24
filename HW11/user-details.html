@@ -8,31 +8,7 @@
 <h1>DETAILS</h1>
 
 <script>
-    // let userid = new URL(location.href).searchParams.get('id')
-    // console.log(userid)
-    // let baseURL = 'http://jsonplaceholder.typicode.com/users/' + userid
-    //
-    // fetch(baseURL).then(res => res.json())
-    //     .then(user => {
-    //     for (let userElementKey in user) {
-    //         let block = document.createElement('div')
-    //         document.body.append(block)
-    //         block.innerText = user[userElementKey]
-    //         if (typeof user[userElementKey] === 'object'){
-    //             for (let blockKey in user[userElementKey]) {
-    //                 let childBlock = document.createElement('div')
-    //                 block.appendChild(childBlock)
-    //                 childBlock.innerText = blockKey + ": " + user[userElementKey][blockKey]
-    //             if (typeof user[userElementKey][blockKey] === 'object'){
-    //                 for (let blockKeyTwo in user[userElementKey][blockKey]) {
-    //                     let childBlockTwo = document.createElement('div')
-    //                     block.appendChild(childBlockTwo)
-    //                     childBlockTwo.innerText = blockKey + ": " + user[userElementKey][blockKey][blockKeyTwo]
-    //                 }
-    //             }
-    //             }
-    //             }
-    //         }})
+
 
     let userid = new URL(location.href).searchParams.get('id')
     console.log(userid)
@@ -40,34 +16,36 @@
 
     fetch(baseURL).then(res => res.json())
         .then(user => {
+let mainDiv = document.createElement('div')
+            document.body.append(mainDiv)
 
-        for (let userElementKey in user) {
-            let block = document.createElement('div')
-            document.body.append(block)
+            for (let [key, value] of Object.entries(user)){
+                if (typeof value !== 'object'){
+                    let oneInfo = document.createElement('div')
+                    mainDiv.append(oneInfo)
+                    oneInfo.innerText = `${key} ${value}`
 
-            // console.log(userElementKey)
-                if (userElementKey === 'address' || userElementKey ==='company'){
-                    for (let firstKey in user[userElementKey]) {
-
-                        let firstChildBlock = document.createElement('div')
-                        block.append(firstChildBlock)
-                        firstChildBlock.innerText = `${firstKey}: ${user[userElementKey][firstKey]}`
-                        console.log(user[userElementKey].geo)
-//=ПРОБЛЕМА
-                        // if (user[userElementKey].geo){
-                        //     for (let geoKey in user[userElementKey].geo) {
-                        //         let secondChildBlock = document.createElement('div')
-                        //         firstChildBlock.append(secondChildBlock)
-                        //         secondChildBlock.innerText =  `${user[userElementKey].geo[geoKey]}`
-                        //     }
-                        // }
-
+                }else {
+                    for (const keyKey in value) {
+                        if (typeof value[keyKey] !== 'object') {
+                            let twoInfo = document.createElement('div')
+                            mainDiv.append(twoInfo)
+                            twoInfo.innerText = `${keyKey}: ${value[keyKey]}`
+                        }else{
+                            for (let valueKeyKey in value[keyKey]) {
+                                let threeInfo = document.createElement('div')
+                                mainDiv.append(threeInfo)
+                                threeInfo.innerText = `${valueKeyKey} :${value[keyKey][valueKeyKey]}`
+                            }
+                        }
                     }
-                }else{
-                    block.innerText = `${userElementKey}: ${user[userElementKey]}`
+
                 }
 
-            }})
+            }
+
+})
+
 
 
 </script>
