@@ -24,7 +24,6 @@ let mainDiv = document.createElement('div')
                     let oneInfo = document.createElement('div')
                     mainDiv.append(oneInfo)
                     oneInfo.innerText = `${key} ${value}`
-
                 }else {
                     for (const keyKey in value) {
                         if (typeof value[keyKey] !== 'object') {
