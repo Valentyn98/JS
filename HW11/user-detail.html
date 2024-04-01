@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DETAILS</h1>
+
+<script>
+
+
+    let userid = new URL(location.href).searchParams.get('id')
+    console.log(userid)
+    let baseURL = 'http://jsonplaceholder.typicode.com/users/' + userid
+
+    fetch(baseURL).then(res => res.json())
+        .then(user => {
+// let mainDiv = document.createElement('div')
+//             document.body.append(mainDiv)
+//             for (let [key, value] of Object.entries(user)){
+//                 if (typeof value !== 'object'){
+//                     let oneInfo = document.createElement('div')
+//                     mainDiv.append(oneInfo)
+//                     oneInfo.innerText = `${key} ${value}`
+//                 }else {
+//                     for (const keyKey in value) {
+//                         if (typeof value[keyKey] !== 'object') {
+//                             let twoInfo = document.createElement('div')
+//                             mainDiv.append(twoInfo)
+//                             twoInfo.innerText = `${keyKey}: ${value[keyKey]}`
+//                         }else{
+//                             for (let valueKeyKey in value[keyKey]) {
+//                                 let threeInfo = document.createElement('div')
+//                                 mainDiv.append(threeInfo)
+//                                 threeInfo.innerText = `${valueKeyKey} :${value[keyKey][valueKeyKey]}`
+//                             }
+//                         }
+//                     }
+//
+//                 }
+//             }
+
+            let mainDiv = document.createElement('div')
+            document.body.append(mainDiv)
+
+
+            for (const [key, value] of Object.entries(user)) {
+                if (typeof value !== 'object'){
+                   let infoOne = document.createElement('div')
+                    mainDiv.append(infoOne)
+                    infoOne.innerText = `${key}: ${value}`
+
+                }else {
+
+                    for (let valueKey in value) {
+                   let  infoTwo = document.createElement('div')
+                    mainDiv.append(infoTwo)
+                        if (typeof value[valueKey] !== 'object'){
+                            infoTwo.innerText = `${valueKey}:  ${value[valueKey]}`
+
+                        }else {
+
+                            for (let valueElementKey in value[valueKey]) {
+                                let infoThree = document.createElement('div')
+                                mainDiv.append(infoThree)
+                                console.log(value[valueKey][valueElementKey])
+                                infoThree.innerText = `${valueElementKey} ${value[valueKey][valueElementKey]}`
+                            }
+                        }
+
+                    }
+                }
+            }
+})
+
+
+
+</script>
+</body>
+</html>

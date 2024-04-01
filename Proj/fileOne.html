@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .hoverForH:hover{
+        background-color: gray;
+    }
+</style>
+<body>
+<!--В index.html-->
+<!--1 отримати масив об'єктів з endpoint`а https://jsonplaceholder.typicode.com/users-->
+<!--2 Вивести id,name всіх user в index.html. Окремий блок для кожного user.-->
+<!--3 Додати кожному блоку кнопку/посилання , при кліку на яку відбувається перехід  на сторінку user-details.html,
+ котра має детальну інфорацію про об'єкт на який клікнули-->
+
+
+<!--index.html - всі блоки з user - по 2 в рядок. кнопки/аосилвння розташувати під інформацією про user.-->
+<script>
+    fetch('http://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(user => {
+
+
+            for (let userElement of user) {
+
+                let hOne = document.createElement('h1')
+                document.body.append(hOne)
+                hOne.innerText = `ID: ${userElement.id}
+                NAME: ${userElement.name}`
+
+                hOne.classList.add('hoverForH')
+
+                hOne.addEventListener('click', () => {
+                    location.href = 'user-details.html?id=' + userElement.id
+                })
+            }
+        });
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

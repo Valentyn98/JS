@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+</head>
+<style>
+    .mainD{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .showPostButton{
+        width: 90%;
+    }
+
+    .contentOfPosts{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+
+    .fatherTitleOfPosts{
+        width: 14vw;
+        height: 12vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        background-color: gray;
+        margin: 5px;
+    }
+
+    .sectionOne{
+        height: 100vh;
+        width: 98vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+    }
+</style>
+<body>
+
+
+<script>
+
+    // user-details.html - блок з інфою про user зверху сторінки.
+    //     Кнопка нижчє, на 90% ширини сторінки, по центру.
+    //     блоки з короткою іфною про post - в ряд по 5.
+
+
+        let userId = new URL(location.href).searchParams.get('id')
+    console.log(userId)
+    let baseURL = 'http://jsonplaceholder.typicode.com/users/' + userId
+
+    let section = document.createElement('section')
+    section.classList.add('sectionOne')
+
+    document.body.append(section)
+
+    fetch(baseURL).then(res => res.json())
+        .then(user => {
+            let mainDiv = document.createElement('div')
+            mainDiv.classList.add('mainD')
+            section.append(mainDiv)
+
+            for ( let [key, value] of Object.entries(user)){
+                if (typeof value !== 'object'){
+                    let infoOne = document.createElement('div')
+                    mainDiv.append(infoOne)
+                    infoOne.innerText = `${key}: ${value}`
+                } else{
+                    for (let keyKey in value) {
+                        let infoTwo = document.createElement('div')
+                        mainDiv.append(infoTwo)
+                        if (typeof value[keyKey] !== "object"){
+                            infoTwo.innerText = `${keyKey}: ${value[keyKey]}`
+                        } else {
+                            for (let valueElementKey in value[keyKey]) {
+                                let infoThree = document.createElement('div')
+                                mainDiv.append(infoThree)
+                                infoThree.innerText = `${valueElementKey}: ${value[keyKey][valueElementKey]}`
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            let but = document.createElement('button')
+            but.type = 'submit'
+            but.classList.add('showPostButton')
+            but.innerText = 'Post of current user'
+
+            mainDiv.append(but)
+            but.addEventListener('click', () => {
+             fetch(`http://jsonplaceholder.typicode.com/users/${userId}/posts`)
+                 .then(value => value.json())
+                 .then(value => {
+                     console.log(value)
+                     let contentOfPosts = document.createElement('div')
+                     contentOfPosts.classList.add('contentOfPosts')
+                     section.append(contentOfPosts)
+
+
+
+                     for (let valueElement of value) {
+                         let titleOfPosts = document.createElement('div')
+                         titleOfPosts.classList.add('fatherTitleOfPosts')
+                         contentOfPosts.append(titleOfPosts)
+
+                         let title = document.createElement('div')
+                         title.classList.add('title')
+                         titleOfPosts.append(title)
+                         title.innerText = ` Title: ${valueElement.title}`
+
+                         let butPostDetails = document.createElement('button')
+                         butPostDetails.type = 'submit'
+                         butPostDetails.innerText = 'ShowDetails'
+                         titleOfPosts.append(butPostDetails)
+
+                         butPostDetails.classList.add('showDet')
+
+                         butPostDetails.addEventListener('click', () =>{
+                             location.href = 'post-details.html?id=' + valueElement.id
+
+
+
+                         })
+                         }
+
+                 })
+            })
+        })
+
+
+
+</script>
+
+</body>
+</html>

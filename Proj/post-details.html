@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DetailsOfPost</title>
+</head>
+<style>
+
+    .sectionTwo{
+        height: 100vh;
+        width: 98vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .containerWithCom{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 85%;
+        height: 100%;
+    }
+
+    .divComments{
+        width: 17vw;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        background-color: gray;
+        margin: 10px;
+        padding: 5px;
+
+    }
+</style>
+<body>
+
+<!--post-details.html - блок з інфою про пост зверху. Коментарі - по 4 в ряд.-->
+<!--Всі елементи котрі характеризують users, posts,-->
+<!--comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)-->
+
+
+<script>
+    let postId = new URL(location.href).searchParams.get('id')
+    console.log(postId)
+    let baseURLPost = 'https://jsonplaceholder.typicode.com/posts/' + postId
+    let sectionTwo = document.createElement('section')
+    document.body.append(sectionTwo)
+    sectionTwo.classList.add('sectionTwo')
+
+    fetch(baseURLPost).then(res => res.json())
+    .then(res => {
+        let postDet = document.createElement('div')
+        sectionTwo.append(postDet)
+
+
+        for (let [key, value] of Object.entries(res)){
+            let postDetInfo = document.createElement('div')
+            postDet.append(postDetInfo)
+            postDetInfo.innerText = `${key}: ${value}`
+
+        }
+        let showComments = document.createElement('button')
+        showComments.type = 'submit'
+        showComments.innerText = 'ShowComments'
+        postDet.append(showComments)
+
+        showComments.addEventListener('click', ()=>{
+            fetch(baseURLPost + `/comments`).then(com => com.json())
+                .then(com => {
+                    console.log(com)
+                    let containerWithCom = document.createElement('div')
+                    containerWithCom.classList.add('containerWithCom')
+                    sectionTwo.append(containerWithCom)
+
+                    for (let comElement of com) {
+                        let divComments = document.createElement('div')
+                        divComments.classList.add('divComments')
+                        containerWithCom.append(divComments)
+                        divComments.innerText =
+                            `PostID:${comElement.postId}
+                             Id: ${comElement.id}
+                             Name: ${comElement.name}
+                             Email: ${comElement.email}
+                             Body: ${comElement.body}`
+                    }
+        })
+        })
+    })
+    //
+    // Стилизація проєкта -
+    // index.html - всі блоки з user - по 2 в рядок. кнопки/аосилвння розташувати під інформацією про user.
+    //     user-details.html - блок з інфою про user зверху сторінки. Кнопка нижчє, на 90% ширини сторінки, по центру.
+    //     блоки з короткою іфною про post - в ряд по 5 .
+    //     post-details.html - блок з інфою про пост зверху. Коментарі - по 4 в ряд.
+    //     Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)
+</script>
+</body>
+</html>

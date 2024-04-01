@@ -88,10 +88,9 @@ fetch('http://jsonplaceholder.typicode.com/users')
             document.body.append(hOne)
                 hOne.innerText = `ID: ${userElement.id} NAME: ${userElement.name}`
                 hOne.addEventListener('click', ()=>{
-                    location.href = 'user-details.html?id=' + userElement.id
+                    location.href = 'user-detail.html?id=' + userElement.id
                     console.log(userElement.id)
                 })
-
         }
     });
 // при кліку на посилання перехід на відповідну сторінку, на якій буде вся інформація про користувача (всі 15 полів)
